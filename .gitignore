@@ -1,0 +1,13 @@
+target/
+*.class
+*.jar
+*.war
+*.ear
+.idea/
+*.iml
+.settings/
+.classpath
+.project
+.mvn/wrapper/maven-wrapper.jar
+*.db-shm
+*.db-wal
