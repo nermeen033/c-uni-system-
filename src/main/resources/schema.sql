@@ -166,6 +166,9 @@ CREATE TABLE IF NOT EXISTS courses (
     ),
     credit_hours INTEGER DEFAULT 3,
     description TEXT,
+    fees REAL DEFAULT 0,
+    max_students INTEGER DEFAULT 50,
+    current_enrolled INTEGER DEFAULT 0,
     is_active INTEGER DEFAULT 1
 );
 
@@ -585,6 +588,7 @@ CREATE TABLE IF NOT EXISTS grades (
     enrollment_id INTEGER UNIQUE NOT NULL,
     s1 REAL DEFAULT 0, -- درجة السعي الأول (Midterm 1)
     s2 REAL DEFAULT 0, -- درجة السعي الثاني (Midterm 2)
+    year_work_score REAL DEFAULT 0, -- أعمال السنة (Year Work Score 20%)
     final_exam REAL DEFAULT 0, -- درجة الفاينال
     total REAL DEFAULT 0, -- المجموع الكلي
     letter_grade TEXT, -- A+, A, B+, B, C+, C, D+, D, F
@@ -655,6 +659,9 @@ CREATE TABLE IF NOT EXISTS payments (
             'Online'
         )
     ),
+    payment_type INTEGER DEFAULT 0, -- PaymentType enum
+    semester INTEGER,
+    academic_year TEXT,
     date DATE DEFAULT CURRENT_DATE,
     status TEXT DEFAULT 'Pending' CHECK (
         status IN (
@@ -690,7 +697,8 @@ CREATE TABLE IF NOT EXISTS news (
     description TEXT,
     date DATE DEFAULT CURRENT_DATE,
     posted_by TEXT,
-    category TEXT DEFAULT 'General',
+    category INTEGER DEFAULT 0,
+    target_department TEXT,
     is_pinned INTEGER DEFAULT 0,
     is_active INTEGER DEFAULT 1
 );
